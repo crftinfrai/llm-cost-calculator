@@ -1,0 +1,8 @@
+[
+  {"provider":"OpenAI","model":"GPT-6.1 Sol","input":2,"output":10,"cached":0.1,"asOf":"2026-10-28","source":"https://developers.openai.com/api/docs/pricing"},
+  {"provider":"OpenAI","model":"GPT-6 Luna","input":0.1,"output":0.5,"cached":0.01,"asOf":"2026-10-28","source":"https://developers.openai.com/api/docs/pricing"},
+  {"provider":"Anthropic","model":"Claude Sonnet 4","input":3,"output":15,"cached":0.3,"asOf":"2026-10-28","source":"https://www.anthropic.com/pricing"},
+  {"provider":"Anthropic","model":"Claude Haiku 3.5","input":0.8,"output":4,"cached":0.08,"asOf":"2026-10-28","source":"https://www.anthropic.com/pricing"},
+  {"provider":"Google","model":"Gemini 3.1 Flash-Lite","input":0.25,"output":1.5,"cached":0.025,"asOf":"2026-10-28","source":"https://ai.google.dev/gemini-api/docs/pricing"},
+  {"provider":"Google","model":"Gemini 4 Argon","input":2,"output":10,"cached":0.1,"asOf":"2026-10-28","source":"https://ai.google.dev/gemini-api/docs/pricing"}
+]

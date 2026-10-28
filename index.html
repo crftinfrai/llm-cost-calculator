@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#08121f">
+    <meta name="description" content="Free LLM cost calculator for comparing AI model pricing, monthly token spend, prompt caching, retries, and cost per successful task.">
+    <meta property="og:title" content="LLM Cost Calculator | CrftInfrai">
+    <meta property="og:description" content="Compare LLM API costs and estimate monthly AI workload spend without an API key.">
+    <meta property="og:type" content="website">
+    <title>LLM Cost Calculator | CrftInfrai</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="https://crftinfrai.com" target="_blank" rel="noreferrer">
+        <span class="brand-mark">C</span>
+        <span>CrftInfrai</span>
+      </a>
+      <nav>
+        <a href="#calculator">Calculator</a>
+        <a href="#method">Method</a>
+        <a href="https://console.crftinfrai.com/ai-cost" target="_blank" rel="noreferrer">AI Cost Intelligence ↗</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow">OPEN SOURCE · NO API KEY REQUIRED</div>
+        <h1>LLM cost calculator</h1>
+        <p class="hero-copy">Estimate monthly AI spend, compare model pricing, and see what a successful task really costs after caching, retries, and failures.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#calculator">Calculate your workload</a>
+          <a class="button ghost" href="https://github.com/crftinfrai/llm-cost-calculator" target="_blank" rel="noreferrer">View on GitHub ↗</a>
+        </div>
+      </section>
+      <section class="summary-grid" aria-label="Selected workload summary">
+        <article class="summary-card accent"><span>Lowest monthly estimate</span><strong id="best-monthly">$0.00</strong><small id="best-model">—</small></article>
+        <article class="summary-card"><span>Lowest cost per task</span><strong id="best-task">$0.0000</strong><small>before your success-rate adjustment</small></article>
+        <article class="summary-card"><span>Lowest cost per successful task</span><strong id="best-success">$0.0000</strong><small>includes the selected success rate</small></article>
+      </section>
+      <section id="calculator" class="workbench">
+        <aside class="panel inputs-panel">
+          <div class="panel-heading"><div><div class="eyebrow">WORKLOAD ASSUMPTIONS</div><h2>Describe your usage</h2></div><button class="text-button" id="reset" type="button">Reset</button></div>
+          <label class="field"><span>Tasks per month</span><input id="tasks" type="number" min="1" step="100" value="30000"><small>Completed or attempted AI tasks in a month.</small></label>
+          <label class="field"><span>Input tokens per task</span><input id="inputTokens" type="number" min="0" step="100" value="2500"><small>Prompt, context, and retrieved text sent to the model.</small></label>
+          <label class="field"><span>Output tokens per task</span><input id="outputTokens" type="number" min="0" step="100" value="700"><small>Expected generated response tokens.</small></label>
+          <label class="field"><span>Cached input</span><div class="range-line"><input id="cache" type="range" min="0" max="100" step="1" value="25"><output id="cacheValue">25%</output></div><small>Share of input tokens billed at the provider's cache-read rate.</small></label>
+          <label class="field"><span>Successful task rate</span><div class="range-line"><input id="success" type="range" min="1" max="100" step="1" value="92"><output id="successValue">92%</output></div><small>Used to estimate retries and cost per successful outcome.</small></label>
+          <label class="field"><span>Additional tool cost per task</span><div class="input-prefix"><span>$</span><input id="toolCost" type="number" min="0" step="0.001" value="0"></div><small>Optional search, execution, or tool cost outside model tokens.</small></label>
+          <p class="privacy-note"><span class="dot"></span> All calculations run locally in your browser. No prompts, keys, or workload data leave this page.</p>
+        </aside>
+        <section class="panel results-panel">
+          <div class="panel-heading results-heading"><div><div class="eyebrow">MODEL COMPARISON</div><h2>Estimated spend</h2></div><span class="catalog-date" id="catalogDate">Pricing catalog</span></div>
+          <div id="modelCards" class="model-cards"></div>
+          <div class="table-wrap"><table><thead><tr><th>Model</th><th>Input / 1M</th><th>Output / 1M</th><th>Per task</th><th>Per successful task</th><th>Monthly</th></tr></thead><tbody id="resultsBody"></tbody></table></div>
+          <div class="result-footnote">Estimates use USD list prices and your assumptions. Provider billing, batch tiers, regional pricing, multimodal tokens, and tool charges may change the result.</div>
+        </section>
+      </section>
+      <section id="method" class="method-section">
+        <div><div class="eyebrow">TRANSPARENT METHODOLOGY</div><h2>Why cost per successful task matters</h2></div>
+        <div class="method-copy"><p>A low token price does not always mean a low cost for a completed outcome. This calculator applies the selected success rate to estimate the effective number of attempts, then reports both the cost of an attempt and the cost of a successful task.</p><div class="formula"><span>Monthly cost</span><b>=</b><span>cost per attempt × tasks ÷ success rate</span></div><p class="muted">Prompt caching is blended between regular input pricing and the provider's cache-read pricing. Add tool costs separately when your workflow uses search, code execution, image generation, speech, or other billable services.</p></div>
+      </section>
+      <section class="source-section">
+        <div class="source-card"><div class="eyebrow">PRICING DATA</div><h2>Check the provider source before billing decisions</h2><p>The catalog is a versioned snapshot. Prices change frequently, and a provider's own pricing page is authoritative.</p><div class="source-links"><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noreferrer">OpenAI pricing ↗</a><a href="https://www.anthropic.com/pricing" target="_blank" rel="noreferrer">Anthropic pricing ↗</a><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noreferrer">Google Gemini pricing ↗</a></div></div>
+        <div class="cta-card"><div class="eyebrow">GO FURTHER</div><h2>Plan AI and cloud infrastructure together</h2><p>CrftInfrai connects AI economics, cloud cost comparison, Terraform generation, and governed Kubernetes operations.</p><a class="button primary" href="https://crftinfrai.com/product" target="_blank" rel="noreferrer">Explore CrftInfrai ↗</a></div>
+      </section>
+    </main>
+    <footer><span>© CrftInfrai · Open source calculator</span><a href="https://github.com/crftinfrai" target="_blank" rel="noreferrer">GitHub organization ↗</a></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
